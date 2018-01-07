@@ -8,6 +8,7 @@
 package org.usfirst.frc.team816.robot;
 
 import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -27,7 +28,8 @@ public class Robot extends IterativeRobot {
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
 	
 	public NetworkTableInstance nTableInstance;
-	
+	public NetworkTable t_conf;
+	public NetworkTableEntry entry_vision_start;
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -37,9 +39,7 @@ public class Robot extends IterativeRobot {
 		m_chooser.addDefault("Default Auto", kDefaultAuto);
 		m_chooser.addObject("My Auto", kCustomAuto);
 		SmartDashboard.putData("Auto choices", m_chooser);
-		nTableInstance = NetworkTableInstance.create();
-		nTableInstance.startServer();
-		
+		nTableInstance = NetworkTableInstance.getDefault();
 		
 	}
 
