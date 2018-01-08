@@ -1,8 +1,8 @@
 package org.usfirst.frc.team816.robot.config;
 
-import org.usfirst.frc.team816.robot.DriveType;
-import org.usfirst.frc.team816.robot.InvertState;
-import org.usfirst.frc.team816.robot.MotorType;
+import org.usfirst.frc.team816.robot.drive.DriveType;
+import org.usfirst.frc.team816.robot.drive.InvertState;
+import org.usfirst.frc.team816.robot.drive.MotorType;
 
 public class PortConfig {
 
