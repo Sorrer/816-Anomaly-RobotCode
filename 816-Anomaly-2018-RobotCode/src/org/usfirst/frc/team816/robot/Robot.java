@@ -7,9 +7,12 @@
 
 package org.usfirst.frc.team816.robot;
 
+import org.usfirst.frc.team816.robot.auto.FieldState;
+
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -30,6 +33,9 @@ public class Robot extends IterativeRobot {
 	public NetworkTableInstance nTableInstance;
 	public NetworkTable t_conf;
 	public NetworkTableEntry entry_vision_start;
+	
+	public FieldState field_state;
+	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -40,6 +46,9 @@ public class Robot extends IterativeRobot {
 		m_chooser.addObject("My Auto", kCustomAuto);
 		SmartDashboard.putData("Auto choices", m_chooser);
 		nTableInstance = NetworkTableInstance.getDefault();
+		
+		field_state = new FieldState();
+		
 		
 	}
 
@@ -56,6 +65,13 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		
+		String data = DriverStation.getInstance().getGameSpecificMessage();
+		
+		if(data.length() == 3) {
+			
+		}
+		
 		m_autoSelected = m_chooser.getSelected();
 		// autoSelected = SmartDashboard.getString("Auto Selector",
 		// defaultAuto);
