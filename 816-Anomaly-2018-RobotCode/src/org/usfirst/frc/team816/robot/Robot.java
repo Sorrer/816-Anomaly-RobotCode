@@ -8,13 +8,13 @@
 package org.usfirst.frc.team816.robot;
 
 import org.usfirst.frc.team816.robot.auto.FieldState;
+import org.usfirst.frc.team816.robot.auto.PositionState;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -26,10 +26,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * project.
  */
 public class Robot extends IterativeRobot {
-	private static final String kDefaultAuto = "Default";
-	private static final String kCustomAuto = "My Auto";
-	private String m_autoSelected;
-	private SendableChooser<String> m_chooser = new SendableChooser<>();
 	
 	public NetworkTableInstance nTableInstance;
 	public NetworkTable t_conf;
@@ -49,9 +45,6 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		m_chooser.addDefault("Default Auto", kDefaultAuto);
-		m_chooser.addObject("My Auto", kCustomAuto);
-		SmartDashboard.putData("Auto choices", m_chooser);
 		nTableInstance = NetworkTableInstance.getDefault();
 		
 		field_state = new FieldState();
@@ -67,10 +60,6 @@ public class Robot extends IterativeRobot {
 			
 		}
 		
-		m_autoSelected = m_chooser.getSelected();
-		// autoSelected = SmartDashboard.getString("Auto Selector",
-		// defaultAuto);
-		System.out.println("Auto selected: " + m_autoSelected);
 	}
 
 	/**
@@ -78,27 +67,23 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		switch (m_autoSelected) {
-			case kCustomAuto:
-				// Put custom auto code here
-				break;
-			case kDefaultAuto:
-			default:
-				// Put default auto code here
-				break;
-		}
+	
 	}
 
-	/**
-	 * This function is called periodically during operator control.
-	 */
+	@Override
+	public void teleopInit() {
+		
+	}
+	
 	@Override
 	public void teleopPeriodic() {
+		
 	}
-
-	/**
-	 * This function is called periodically during test mode.
-	 */
+	
+	@Override
+	public void testInit() {
+	}
+	
 	@Override
 	public void testPeriodic() {
 	}

@@ -62,4 +62,14 @@ public class FieldState {
 		}
 		
 	}
+	
+	PositionState startPosition = PositionState.NONE;
+	
+	public void setStartinPosition(PositionState state) {
+		this.startPosition = state;
+	}
+	
+	public PositionState getStartingPosition() {
+		return this.startPosition;
+	}
 }

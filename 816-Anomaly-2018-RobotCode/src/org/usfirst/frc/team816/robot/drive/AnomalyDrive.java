@@ -4,7 +4,6 @@ import org.usfirst.frc.team816.robot.Controllers;
 import org.usfirst.frc.team816.robot.config.PortConfig;
 
 import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -30,6 +29,7 @@ public class AnomalyDrive {
 	Spark S_LEFT_2;
 	Spark S_RIGHT_2;
 	
+	boolean inited = false;
 	
 	/**
 	 * Used to make our robot drive how we want it to drive
@@ -39,6 +39,9 @@ public class AnomalyDrive {
 	}
 	
 	public boolean init() {
+		
+		if(!inited) { inited = true; } else { System.err.println("Init already executed, shouldn't call twice;");return false;}
+		
 		switch(type) {
 		case TANK_DRIVE:
 			switch(PortConfig.DRIVE_CONTROLLERS) {
@@ -132,8 +135,20 @@ public class AnomalyDrive {
 		return false;
 	}
 	
+	/**
+	 * Used for auto
+	 * @return DifferentialDrive Drive
+	 */
+	public DifferentialDrive getDrive() {
+		if(this.dDrive == null) {
+			System.err.println("AnomalyDrive class is not init");
+		}
+		return this.dDrive;
+	}
+	
 	private boolean tank() {
-		return false;
+		dDrive.tankDrive(0, 0);
+		return true;
 	}
 	
 	private boolean custom() {
