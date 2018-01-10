@@ -1,10 +1,11 @@
 package org.usfirst.frc.team816.robot.config;
 
+import org.usfirst.frc.team816.robot.controlling.ControllingType;
 import org.usfirst.frc.team816.robot.drive.DriveType;
 import org.usfirst.frc.team816.robot.drive.InvertState;
 import org.usfirst.frc.team816.robot.drive.MotorType;
 
-public class PortConfig {
+public class Config {
 
 	public static DriveType MOTORS_CONFIG = DriveType.TWO_DRIVE;
 
@@ -31,5 +32,11 @@ public class PortConfig {
 
 	public static int JOYSTICK_LEFT 			= 0;
 	public static int JOYSTICK_RIGHT 			= 1;
+
+	public static double JOYSTICK_LEFT_DEADZONE 	= 0.05;
+	public static double JOYSTICK_RIGHT_DEADZONE 	= 0.05;
+	
+	public static ControllingType DRIVE_TYPE 	= ControllingType.DOUBLE_JOYSTICK_TANK;
+	
 	public static int CONTROLLER 				= 2;
 }
