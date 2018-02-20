@@ -58,7 +58,7 @@ public class AutoPath {
 		 * }
 		 * 
 		 * 
-		 *______THIS IS A ConditionClass (Can be used to define required conditions or current value conditons
+		 *_no_____THIS IS A ConditionClass (Can be used to define required conditions or current value conditons
 		 * 
 		 * ArrayList<PositionState> starting_positions = new ArrayList<PositionState>();
 		 * 
@@ -84,6 +84,27 @@ public class AutoPath {
 		 * 
 		 * 		return true;	
 		 * }
+		 * 
+		 * 
+		 * ........
+		 * 
+		 * NOT OPTImIZE BUT WE CAN OPTIMIZE LATER, IS FINE
+		 * 
+		 * for(ItemType itemVar1 : listOfItems){
+		 * 	for(ItemType itemVar2 : listOffItms){
+		 * 		if(itemVar1.compareConditions(itemVar2)){
+		 * 			YES
+		 * 		}
+		 * 	}
+		 * }
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
 		 * 
 		 */
 	}
