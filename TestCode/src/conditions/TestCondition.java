@@ -23,7 +23,7 @@ public class TestCondition extends Condition{
 	}
 
 	@Override
-	public boolean compareConditon(Condition condition) {
+	public boolean compareCondition(Condition condition) {
 		
 		if(condition.getClass() == this.getClass()) { 
 			if(((boolean) condition.getValue()) == ( this.value)) {

@@ -1,19 +1,33 @@
+import Auto.AutoPath;
+import Auto.Conditions;
 import Auto.FieldState;
+import Auto.Goal;
+import Auto.PositionState;
+import Auto.routes.RouteID;
 import conditions.FieldStateCondition;
+import conditions.GoalCondition;
+import conditions.StartingPositionCondition;
 import conditions.TestCondition;
 
 public class test {
+	
+	
+	
+	
+	
+	
+	
 	public static void main(String args[]) {
 		TestCondition tc = new TestCondition(false);
 		TestCondition tc2 = new TestCondition(true);
 		TestCondition tc3 = new TestCondition(true);
 		
 
-		System.out.println(tc.compareConditon(tc2));
-		System.out.println(tc.compareConditon(tc));
-		System.out.println(tc2.compareConditon(tc));
-		System.out.println(tc2.compareConditon(tc2));
-		System.out.println(tc2.compareConditon(tc3));
+		System.out.println(tc.compareCondition(tc2));
+		System.out.println(tc.compareCondition(tc));
+		System.out.println(tc2.compareCondition(tc));
+		System.out.println(tc2.compareCondition(tc2));
+		System.out.println(tc2.compareCondition(tc3));
 		System.out.println("///////////////////////");
 		
 		FieldState fs = new FieldState();
@@ -33,24 +47,100 @@ public class test {
 
 		FieldStateCondition fsc3 = new FieldStateCondition(fs3);
 
-		System.out.println(fsc.compareConditon(fsc1));
-		System.out.println(fsc.compareConditon(fsc2));
-		System.out.println(fsc.compareConditon(fsc3));
-		System.out.println(fsc.compareConditon(fsc));
+		System.out.println(fsc.compareCondition(fsc1));
+		System.out.println(fsc.compareCondition(fsc2));
+		System.out.println(fsc.compareCondition(fsc3));
+		System.out.println(fsc.compareCondition(fsc));
 
-		System.out.println(fsc1.compareConditon(fsc1));
-		System.out.println(fsc1.compareConditon(fsc2));
-		System.out.println(fsc1.compareConditon(fsc3));
-		System.out.println(fsc1.compareConditon(fsc));
+		System.out.println(fsc1.compareCondition(fsc1));
+		System.out.println(fsc1.compareCondition(fsc2));
+		System.out.println(fsc1.compareCondition(fsc3));
+		System.out.println(fsc1.compareCondition(fsc));
 
-		System.out.println(fsc2.compareConditon(fsc1));
-		System.out.println(fsc2.compareConditon(fsc2));
-		System.out.println(fsc2.compareConditon(fsc3));
-		System.out.println(fsc2.compareConditon(fsc));
+		System.out.println(fsc2.compareCondition(fsc1));
+		System.out.println(fsc2.compareCondition(fsc2));
+		System.out.println(fsc2.compareCondition(fsc3));
+		System.out.println(fsc2.compareCondition(fsc));
 
-		System.out.println(fsc3.compareConditon(fsc1));
-		System.out.println(fsc3.compareConditon(fsc2));
-		System.out.println(fsc3.compareConditon(fsc3));
-		System.out.println(fsc3.compareConditon(fsc));
+		System.out.println(fsc3.compareCondition(fsc1));
+		System.out.println(fsc3.compareCondition(fsc2));
+		System.out.println(fsc3.compareCondition(fsc3));
+		System.out.println(fsc3.compareCondition(fsc));
+		
+		System.out.println("///////////////////////");
+		fs.setStartinPosition(PositionState.NONE);
+		fs2.setStartinPosition(PositionState.LEFT);
+		fs3.setStartinPosition(PositionState.RIGHT);
+		fs1.setStartinPosition(PositionState.LEFT);
+
+		
+		
+		
+		StartingPositionCondition spc = new StartingPositionCondition(fs);
+		StartingPositionCondition spc1 = new StartingPositionCondition(fs1);
+		StartingPositionCondition spc2 = new StartingPositionCondition(fs2);
+		StartingPositionCondition spc3 = new StartingPositionCondition(fs3);
+
+		System.out.println(spc.compareCondition(spc));
+		System.out.println(spc.compareCondition(spc1));
+		System.out.println(spc.compareCondition(spc2));
+		System.out.println(spc.compareCondition(spc3));
+		
+		System.out.println(spc1.compareCondition(spc));
+		System.out.println(spc1.compareCondition(spc1));
+		System.out.println(spc1.compareCondition(spc2));
+		System.out.println(spc1.compareCondition(spc3));
+		
+		System.out.println(spc2.compareCondition(spc));
+		System.out.println(spc2.compareCondition(spc1));
+		System.out.println(spc2.compareCondition(spc2));
+		System.out.println(spc2.compareCondition(spc3));
+		
+		System.out.println(spc3.compareCondition(spc));
+		System.out.println(spc3.compareCondition(spc1));
+		System.out.println(spc3.compareCondition(spc2));
+		System.out.println(spc3.compareCondition(spc3));
+
+		System.out.println("///////////////////////");
+
+		
+		Goal g = Goal.NONE;
+		Goal g1 = Goal.SCALE;
+		Goal g2 = Goal.SWITCH;
+		Goal g3 = Goal.BOX;
+		
+		GoalCondition gc = new GoalCondition(g);
+		GoalCondition gc1 = new GoalCondition(g1);
+		GoalCondition gc2 = new GoalCondition(g2);
+		GoalCondition gc3 = new GoalCondition(g3);
+		
+		System.out.println(gc.compareCondition(gc));
+		System.out.println(gc.compareCondition(gc1));
+		System.out.println(gc.compareCondition(gc2));
+		System.out.println(gc.compareCondition(gc3));
+		
+		System.out.println(gc1.compareCondition(gc));
+		System.out.println(gc1.compareCondition(gc1));
+		System.out.println(gc1.compareCondition(gc2));
+		System.out.println(gc1.compareCondition(gc3));
+		
+		System.out.println(gc2.compareCondition(gc));
+		System.out.println(gc2.compareCondition(gc1));
+		System.out.println(gc2.compareCondition(gc2));
+		System.out.println(gc2.compareCondition(gc3));
+		
+		System.out.println(gc3.compareCondition(gc));
+		System.out.println(gc3.compareCondition(gc1));
+		System.out.println(gc3.compareCondition(gc2));
+		System.out.println(gc3.compareCondition(gc3));
+
+		gc2.setValue(fsc1.getValue());
+		
+		System.out.println("///////////////////////");
+
+		AutoPath a = new AutoPath();
+		Conditions c = new Conditions();
+		
+		
 	}
 }

@@ -12,6 +12,10 @@ public class FieldState { // mock fieldstate class
 	 */
 	public FieldState() {}
 	
+	public FieldState(String positions) {
+		this.setFieldState(positions);
+	}
+	
 	/**
 	 *  Sets the field state (Left or Right) of the enemy switch, ally switch, and the scale
 	 * 
@@ -92,6 +96,16 @@ public class FieldState { // mock fieldstate class
 		return false;
 	}
 	
+	public boolean compareStartingPosition(FieldState fs) {
+		if(fs.getStartingPosition() == PositionState.NONE || this.getStartingPosition() == PositionState.NONE) {
+			return true;
+		}else if(fs.getStartingPosition() == this.getStartingPosition()) {
+			return true;
+		}
+		return false;
+	}
+
+	
 	private boolean compareAllySwitch(FieldState fs) {
 		if(fs.getAllySwitch() == PositionState.NONE || this.getAllySwitch() == PositionState.NONE) {
 			return true;
@@ -118,4 +132,5 @@ public class FieldState { // mock fieldstate class
 		}
 		return false;
 	}
+
 }

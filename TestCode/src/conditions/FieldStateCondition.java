@@ -4,6 +4,7 @@ import Auto.FieldState;
 
 public class FieldStateCondition extends Condition{
 
+
 	FieldState condition;
 	
 	public FieldStateCondition(FieldState state) {
@@ -23,7 +24,7 @@ public class FieldStateCondition extends Condition{
 	}
 
 	@Override
-	public boolean compareConditon(Condition condition) {
+	public boolean compareCondition(Condition condition) {
 		
 		if(condition.getClass() == this.getClass()) {
 			if(this.condition.compare((FieldState) condition.getValue())) {

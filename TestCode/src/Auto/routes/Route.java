@@ -3,11 +3,28 @@ package Auto.routes;
 import Auto.Conditions;
 
 public abstract class Route {
+
+	Conditions c;
+	RouteID id = RouteID.NONE;
 	
-	protected Conditions conditions;
+	
+	public abstract void init();
 	
 	public Conditions getConditions() {
-		return this.conditions;
+		return c;
 	}
 	
+	public void setConditions(Conditions c) {
+		this.c = c;
+	}
+	
+	public RouteID getID() {
+		return id;
+	}
+	
+	public void setRouteID(RouteID id) {
+		this.id = id;
+	}
 }
+	
+
