@@ -141,6 +141,15 @@ public class test {
 		AutoPath a = new AutoPath();
 		Conditions c = new Conditions();
 		
+		c.InitCurrent();
+		c.setFieldState("NLN");
+		c.setGoal(Goal.SCALE);
+		c.setStartinPosition(PositionState.LEFT);
+		
+		System.out.println(c.getConditionsList());
+ // should return RouteLeftScale
+		System.out.println(a.pathfind(c));
+		
 		
 	}
 }

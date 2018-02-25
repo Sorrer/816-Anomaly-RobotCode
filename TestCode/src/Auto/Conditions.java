@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import conditions.Condition;
 import conditions.FieldStateCondition;
 import conditions.GoalCondition;
+import conditions.StartingPositionCondition;
 
 public class Conditions {
 
@@ -15,7 +16,10 @@ public class Conditions {
 	Goal g;
 	GoalCondition goal_condition;
 	FieldStateCondition fieldstate_condition;
+	StartingPositionCondition starting_condition;
 	FieldState fs;
+	PositionState sp;
+	String fp;
 	
 	public Conditions() {
 	
@@ -24,18 +28,24 @@ public class Conditions {
 	
 	
 	
-	public void InitCurrent() {
+	public void initCurrent() {
 		
 		g = Goal.NONE;
 		goal_condition = new GoalCondition(g);
 		
-		fs = new FieldState("NNN");
-		fs.setStartinPosition(PositionState.NONE);
+		fp = "NNN";
+		fs = new FieldState(fp);
+		
+		sp = PositionState.NONE;
+		fs.setStartinPosition(sp);
 		
 		fieldstate_condition = new FieldStateCondition(fs);
+		starting_condition = new StartingPositionCondition(fs);
+		
 		
 		conditions_list.add(goal_condition);
 		conditions_list.add(fieldstate_condition);
+		conditions_list.add(starting_condition);
 		
 	}
 
@@ -45,16 +55,18 @@ public class Conditions {
 	
 	
 	public void setFieldState(String positions) {
-		fs.setFieldState(positions);
+		fp = positions;
 	}
 	
 	public void setStartinPosition(PositionState state) {
-		fs.setStartinPosition(state);
+		sp = state;
 	}
 	
 	public ArrayList<Condition> getConditionsList() {
 		return this.conditions_list;
 	}
+	
+	
 
 	public boolean compareConditionsList(Conditions conditions) {
 

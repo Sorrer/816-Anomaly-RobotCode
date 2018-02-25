@@ -79,6 +79,7 @@ public class AutoPath {
 	public RouteID pathfind(Conditions currentC) {
 		
 		for(Route route : routes) {
+			route.init();
 			if (currentC.compareConditionsList(route.getConditions())) {
 				return route.getID();
 			}
