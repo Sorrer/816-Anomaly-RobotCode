@@ -15,6 +15,7 @@ public class RouteLeftSwitch extends Route{
 	@Override
 	public void init() {
 	c = new Conditions();
+	c.initCurrent();
 	c.setFieldState("LNN");
 	c.setStartinPosition(PositionState.LEFT);
 	c.setGoal(Goal.SWITCH);

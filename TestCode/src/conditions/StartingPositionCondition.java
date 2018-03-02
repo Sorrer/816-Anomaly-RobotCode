@@ -25,8 +25,8 @@ public class StartingPositionCondition extends Condition {
 
 	@Override
 	public boolean compareCondition(Condition condition) {
-		
-		if(condition.getClass() == this.getClass()) {
+
+		if (condition.getClass().equals(this.getClass())) {
 			if(this.condition.compareStartingPosition((FieldState) condition.getValue())) {
 				return true;
 			}

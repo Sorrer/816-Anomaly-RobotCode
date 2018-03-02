@@ -147,16 +147,26 @@ public class test {
 		a.init();
 		a.setRouteList();
 		c.initCurrent();
+
 		c.setFieldState("LNN");
-		c.setGoal(Goal.SWITCH);
 		c.setStartinPosition(PositionState.LEFT);
-		
+		c.setGoal(Goal.SWITCH);
+				
 		System.out.println(c.getConditionsList());
  // should return RouteLeftSwitch
 		
 		
 		System.out.println(a.pathfind(c));
+		RouteLeftSwitch rls = new RouteLeftSwitch();
+		rls.init();
 		
+		System.out.println("??????????????");
+		System.out.println(c.compareConditionsList(rls.getConditions()));
 		
+
+		GoalCondition gc11 = new GoalCondition(Goal.NONE);
+		GoalCondition gc22 = new GoalCondition(Goal.NONE);
+		
+		System.out.println(gc11.compareCondition(gc22));
 	}
 }

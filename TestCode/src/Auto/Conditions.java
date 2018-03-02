@@ -72,14 +72,22 @@ public class Conditions {
 		
 		for(Condition con1 : this.getConditionsList()) {
 			boolean correct = false;
+			Condition conTemp = con1;
 			
 			for(Condition con2 : conditions.getConditionsList()) {
 				if(con1.compareCondition(con2)) {  // never equaling true
 					correct = true;
+					break;
+				}else {
+					conTemp = con2;
 				}
+				
 			}
 			
-			if(!correct) return false;
+			if(!correct) {
+				System.out.println(conTemp.getValue() + " " + con1.getValue() + " " + con1.getClass());
+				return false;
+			}
 		}
 		
 		return true;

@@ -36,7 +36,7 @@ public class GoalCondition extends Condition {
 
 	@Override
 	public boolean compareCondition(Condition condition) {
-		if (condition.getClass() == this.getClass()) {
+		if (condition.getClass().equals(this.getClass())) {
 			if (compareGoal((Goal) condition.getValue())) {
 				return true;
 			}
