@@ -74,9 +74,10 @@ public class Conditions {
 			boolean correct = false;
 			
 			for(Condition con2 : conditions.getConditionsList()) {
+				System.out.println(con1.getValue() + " " + con2.getValue() + " " + con1.compareCondition(con2));
 				if(con1.compareCondition(con2)) {  // always equaling true stops at first var?
 					correct = true;
-					continue;
+					break;
 				}
 				
 			}
