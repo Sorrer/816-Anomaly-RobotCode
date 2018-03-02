@@ -12,6 +12,7 @@ public class RouteScaleMidLeft extends Route {
 		
 	}
 
+
 	@Override
 	public void init() {
 		c = new Conditions();

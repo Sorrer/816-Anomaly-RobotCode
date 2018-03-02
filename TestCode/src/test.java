@@ -4,6 +4,8 @@ import Auto.FieldState;
 import Auto.Goal;
 import Auto.PositionState;
 import Auto.routes.RouteID;
+import Auto.routes.RouteLeftSwitch;
+import conditions.Condition;
 import conditions.FieldStateCondition;
 import conditions.GoalCondition;
 import conditions.StartingPositionCondition;
@@ -140,14 +142,19 @@ public class test {
 
 		AutoPath a = new AutoPath();
 		Conditions c = new Conditions();
+	
 		
-		c.InitCurrent();
-		c.setFieldState("NLN");
-		c.setGoal(Goal.SCALE);
+		a.init();
+		a.setRouteList();
+		c.initCurrent();
+		c.setFieldState("LNN");
+		c.setGoal(Goal.SWITCH);
 		c.setStartinPosition(PositionState.LEFT);
 		
 		System.out.println(c.getConditionsList());
- // should return RouteLeftScale
+ // should return RouteLeftSwitch
+		
+		
 		System.out.println(a.pathfind(c));
 		
 		

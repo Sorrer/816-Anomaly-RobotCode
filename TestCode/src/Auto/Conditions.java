@@ -13,7 +13,7 @@ public class Conditions {
 	
 	ArrayList<Condition> conditions_list = new ArrayList<Condition>();
 	
-	Goal g;
+	public Goal g;
 	GoalCondition goal_condition;
 	FieldStateCondition fieldstate_condition;
 	StartingPositionCondition starting_condition;
@@ -69,12 +69,12 @@ public class Conditions {
 	
 
 	public boolean compareConditionsList(Conditions conditions) {
-
+		
 		for(Condition con1 : this.getConditionsList()) {
 			boolean correct = false;
 			
 			for(Condition con2 : conditions.getConditionsList()) {
-				if(con1.compareCondition(con2)) {
+				if(con1.compareCondition(con2)) {  // never equaling true
 					correct = true;
 				}
 			}

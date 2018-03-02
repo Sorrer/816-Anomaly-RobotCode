@@ -8,6 +8,7 @@ public abstract class Route {
 	RouteID id = RouteID.NONE;
 	
 	
+	
 	public abstract void init();
 	
 	public Conditions getConditions() {

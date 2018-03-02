@@ -7,9 +7,8 @@ import Auto.PositionState;
 public class RouteLeftScale extends Route{
 
 	public RouteLeftScale() {	}
-	
-	
-	
+
+
 	@Override
 	public void init() {
 		c = new Conditions();
