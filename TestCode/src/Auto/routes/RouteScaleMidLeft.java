@@ -16,6 +16,7 @@ public class RouteScaleMidLeft extends Route {
 	@Override
 	public void init() {
 		c = new Conditions();
+		c.initCurrent();
 		c.setFieldState("NLN");
 		c.setStartinPosition(PositionState.CENTER);
 		c.setGoal(Goal.SCALE);

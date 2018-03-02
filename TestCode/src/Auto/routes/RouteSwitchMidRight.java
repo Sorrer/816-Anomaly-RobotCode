@@ -16,6 +16,7 @@ public class RouteSwitchMidRight extends Route {
 	@Override
 	public void init() {
 		c = new Conditions();
+		c.initCurrent();
 		c.setFieldState("NLN");
 		c.setStartinPosition(PositionState.LEFT);
 		c.setGoal(Goal.SCALE);

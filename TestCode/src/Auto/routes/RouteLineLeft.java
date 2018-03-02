@@ -19,6 +19,7 @@ public class RouteLineLeft extends Route {
 	@Override
 	public void init() {
 		c = new Conditions();
+		c.initCurrent();
 		c.setFieldState("NNN");
 		c.setStartinPosition(PositionState.LEFT);
 		c.setGoal(Goal.LINE);

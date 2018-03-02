@@ -3,9 +3,8 @@ import Auto.Conditions;
 import Auto.FieldState;
 import Auto.Goal;
 import Auto.PositionState;
-import Auto.routes.RouteID;
+import Auto.routes.RouteLeftScale;
 import Auto.routes.RouteLeftSwitch;
-import conditions.Condition;
 import conditions.FieldStateCondition;
 import conditions.GoalCondition;
 import conditions.StartingPositionCondition;
@@ -148,21 +147,26 @@ public class test {
 		a.setRouteList();
 		c.initCurrent();
 
-		c.setFieldState("LNN");
-		c.setStartinPosition(PositionState.LEFT);
+		c.setFieldState("RNN");
+		c.setStartinPosition(PositionState.RIGHT);
 		c.setGoal(Goal.SWITCH);
 				
 		System.out.println(c.getConditionsList());
+
  // should return RouteLeftSwitch
 		
-		
+		System.out.println(c.g);
 		System.out.println(a.pathfind(c));
+		System.out.println("///////////////////////");
+
 		RouteLeftSwitch rls = new RouteLeftSwitch();
+		RouteLeftScale rlsc = new RouteLeftScale();
 		rls.init();
+		rlsc.init();
 		
 		System.out.println("??????????????");
+		System.out.println(c.compareConditionsList(rlsc.getConditions()));
 		System.out.println(c.compareConditionsList(rls.getConditions()));
-		
 
 		GoalCondition gc11 = new GoalCondition(Goal.NONE);
 		GoalCondition gc22 = new GoalCondition(Goal.NONE);

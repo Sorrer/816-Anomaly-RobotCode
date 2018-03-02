@@ -18,6 +18,7 @@ public class RouteLineMidRight extends Route {
 	@Override
 	public void init() {
 		c = new Conditions();
+		c.initCurrent();
 		c.setFieldState("NNN");
 		c.setStartinPosition(PositionState.CENTER);
 		c.setGoal(Goal.RIGHT_LINE);

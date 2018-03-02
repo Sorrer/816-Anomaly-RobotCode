@@ -15,6 +15,7 @@ public class RouteLineRight extends Route {
 	@Override
 	public void init() {
 		c = new Conditions();
+		c.initCurrent();
 		c.setFieldState("NNN");
 		c.setStartinPosition(PositionState.RIGHT);
 		c.setGoal(Goal.RIGHT_LINE);
