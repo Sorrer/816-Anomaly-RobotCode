@@ -37,10 +37,20 @@ public class Config {
 	public static double JOYSTICK_RIGHT_DEADZONE 	= 0.01;
 	
 	public static ControllingType DRIVE_TYPE 	= ControllingType.DOUBLE_JOYSTICK_TANK;
+
+	public static int JOYSTICK_OPERATOR = 3;
 	
-	public static int CONTROLLER 				= 2;
+	public static int LIFT_SPARK_CONTROLLER = 6;
 	
-	public static int DRIVING_PERCISION_MODE_BUTTON = 1;
+	public static int INTAKE_LEFT_SPARK_CONTROLLER = 3;
+	public static int INTAKE_RIGHT_SPARK_CONTROLLER = 4;
+
+	public static int OC_LIFT = 1;
+	public static int OC_INTAKE_OUT = 2;
+	public static int OC_INTAKE_IN = 3;
+	
+	
+	public static int DRIVING_TURBO_MODE_BUTTON = 1;
 	
 	//DRIVE
 	
@@ -59,5 +69,7 @@ public static int CURVE_INCREMENTS_TIMING =  (int) ( fullPowerTargetTiming/(1 / 
 
 	//How the curve should be using exponents
 public static float CURVE_AMOUNT = 2f;
+
+
 	
 }

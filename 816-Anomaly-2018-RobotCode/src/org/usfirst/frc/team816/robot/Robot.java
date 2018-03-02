@@ -5,14 +5,14 @@ import org.usfirst.frc.team816.robot.config.Config;
 import org.usfirst.frc.team816.robot.controlling.Controllers;
 import org.usfirst.frc.team816.robot.controlling.ControllingType;
 import org.usfirst.frc.team816.robot.drive.AnomalyDrive;
+import org.usfirst.frc.team816.robot.parts.Intake;
+import org.usfirst.frc.team816.robot.parts.Lift;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Spark;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -40,11 +40,14 @@ public class Robot extends IterativeRobot {
 	 * used for any initialization code.
 	 */
 	
-	Spark lift;
+//	Spark lift;
 	
-	Spark intake1, intake2;
+//	Spark intake1, intake2;
 	
-	Joystick controller;
+//	Joystick controller;
+	
+	Lift lift;
+	Intake intake;
 	
 	@Override
 	public void robotInit() {
@@ -57,15 +60,21 @@ public class Robot extends IterativeRobot {
 		aDrive.initSpeedControllers();
 		aDrive.init();
 		
-		lift = new Spark(6);
+		lift = new Lift();
+		intake = new Intake();
+		
+		lift.initMech(controllers);
+		intake.initMech(controllers);
+		
+//		lift = new Spark(6);
 		
 //		lift.disable();
 		
-		intake1 = new Spark(3);
-		intake2 = new Spark(4);
-		
-		
-		controller = new Joystick(2);
+//		intake1 = new Spark(3);
+//		intake2 = new Spark(4);
+//		
+//		
+//		controller = new Joystick(2);
 	}
 
 	@Override
@@ -95,27 +104,31 @@ public class Robot extends IterativeRobot {
 	
 	@Override
 	public void teleopPeriodic() {
-		aDrive.run();
 		
-		double vLeft = controller.getRawAxis(1);
-		
-		if(AnomalyMaths.withIn(vLeft, 0, Config.JOYSTICK_LEFT_DEADZONE)) {
-			vLeft = 0;
-		}
-
-		double iLeft = controller.getRawAxis(2);
-		double iRight = controller.getRawAxis(3);
-		
-		iLeft = -((iLeft - 0.5) *2);
-		iRight = (iRight - 0.5) *2;
-		
-		intake1.set(iLeft + iRight);
-		intake2.set(-(iLeft + iRight));
+		aDrive.run();		
+		intake.teleop();
+		lift.teleop();
 		
 		
-		
-		lift.set(vLeft/2);
-		
+//		double vLeft = controller.getRawAxis(1);
+//		
+//		if(AnomalyMaths.withIn(vLeft, 0, Config.JOYSTICK_LEFT_DEADZONE)) {
+//			vLeft = 0;
+//		}
+//
+//		double iLeft = controller.getRawAxis(2);
+//		double iRight = controller.getRawAxis(3);
+//		
+//		iLeft = -((iLeft - 0.5) *2);
+//		iRight = (iRight - 0.5) *2;
+//		
+//		intake1.set(iLeft + iRight);
+//		intake2.set(-(iLeft + iRight));
+//		
+//		
+//		
+//		lift.set(vLeft/2);
+//		
 	}
 	
 	@Override
@@ -124,5 +137,8 @@ public class Robot extends IterativeRobot {
 	
 	@Override
 	public void testPeriodic() {
+		aDrive.run();		
+		intake.teleop();
+		lift.teleop();
 	}
 }

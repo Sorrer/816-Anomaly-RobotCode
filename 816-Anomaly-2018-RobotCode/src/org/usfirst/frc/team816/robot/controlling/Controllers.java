@@ -12,7 +12,8 @@ public class Controllers{
 	
 	Joystick joy_1; // Left drive
 	Joystick joy_2; // Right Drive
-
+	
+	Joystick operator;
 	
 	ControllingType drivingType = ControllingType.DOUBLE_JOYSTICK_TANK;
 	
@@ -30,6 +31,8 @@ public class Controllers{
 			break;
 		
 		}
+		
+		operator = new Joystick(Config.JOYSTICK_OPERATOR);
 	}
 	
 
@@ -54,5 +57,8 @@ public class Controllers{
 		return null;
 	}
 	
+	public GenericHID getOperatorController() {
+		return this.operator;
+	}
 	
 }

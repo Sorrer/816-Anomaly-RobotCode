@@ -21,6 +21,7 @@ public class DashboardData {
 		position_chooser.addDefault(DashboardConfig.START_POSITION_NONE, PositionState.NONE);
 		position_chooser.addObject(DashboardConfig.START_POSITION_LEFT, PositionState.LEFT);
 		position_chooser.addObject(DashboardConfig.START_POSITION_CENTER, PositionState.CENTER);
+		position_chooser.addObject(DashboardConfig.START_POSITION_CENTER, PositionState.CENTER);
 		position_chooser.addObject(DashboardConfig.START_POSITION_RIGHT, PositionState.RIGHT);
 		
 		SmartDashboard.putData(position_chooser);

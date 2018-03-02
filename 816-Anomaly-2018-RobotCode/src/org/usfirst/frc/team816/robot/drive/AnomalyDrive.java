@@ -180,8 +180,8 @@ public class AnomalyDrive {
 		double vLeft = leftStick.getY();
 		double vRight = rightStick.getY();
 		
-		if(leftStick.getRawButton(Config.DRIVING_PERCISION_MODE_BUTTON) || 
-			rightStick.getRawButton(Config.DRIVING_PERCISION_MODE_BUTTON)) {
+		if(leftStick.getRawButton(Config.DRIVING_TURBO_MODE_BUTTON) || 
+			rightStick.getRawButton(Config.DRIVING_TURBO_MODE_BUTTON)) {
 			
 			vLeft = leftStick.getY();
 			vRight = rightStick.getY();
@@ -194,8 +194,8 @@ public class AnomalyDrive {
 			}
 
 				
-			vLeft /= 2;
-			vRight /= 2;
+			vLeft *= 2;
+			vRight *= 2;
 
 		}else {
 		
@@ -213,9 +213,9 @@ public class AnomalyDrive {
 		if(AnomalyMaths.withIn(vRight, 0, Config.JOYSTICK_RIGHT_DEADZONE)) {
 			vRight = 0;
 		}
-
 		
-		System.out.println(vLeft + "" + vRight);
+		vLeft /= 2;
+		vRight /= 2;
 		
 		}
 		
