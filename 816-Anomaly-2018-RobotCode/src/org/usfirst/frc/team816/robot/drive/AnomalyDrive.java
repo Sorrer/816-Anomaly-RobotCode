@@ -2,15 +2,17 @@ package org.usfirst.frc.team816.robot.drive;
 
 import org.usfirst.frc.team816.robot.AnomalyMaths;
 import org.usfirst.frc.team816.robot.config.Config;
+import org.usfirst.frc.team816.robot.controlling.AccelerationCurve;
 import org.usfirst.frc.team816.robot.controlling.Controllers;
 
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class AnomalyDrive {
-	private DriveType type = DriveType.TANK_DRIVE;
+	private DriveType type = Config.MOTORS_CONFIG;
 	
 	DifferentialDrive dDrive;
 
@@ -44,11 +46,24 @@ public class AnomalyDrive {
 	}
 	
 	public boolean init() {
+		curveLeftDrive = new AccelerationCurve(Config.CURVE_AMOUNT, Config.CURVE_INCREMENTS_AMOUNT, Config.CURVE_INCREMENTS_TIMING);
+		 curveRightDrive = new AccelerationCurve(Config.CURVE_AMOUNT, Config.CURVE_INCREMENTS_AMOUNT, Config.CURVE_INCREMENTS_TIMING);
 		
 		if(!inited) { inited = true; } else { System.err.println("Init already executed, shouldn't call twice;");return false;}
 		
 		switch(type) {
 		case TANK_DRIVE:
+			switch(Config.DRIVE_CONTROLLERS) {
+			case TALON:
+				dDrive = new DifferentialDrive(talons_left, talons_right);
+				break;
+			
+			case SPARK:
+				dDrive = new DifferentialDrive(sparks_left, sparks_right);
+				break;
+			}
+			return true;
+		case TWO_DRIVE:
 			switch(Config.DRIVE_CONTROLLERS) {
 			case TALON:
 				dDrive = new DifferentialDrive(talons_left, talons_right);
@@ -133,6 +148,8 @@ public class AnomalyDrive {
 		switch(type) {
 		case TANK_DRIVE:
 			return tank();
+		case TWO_DRIVE:
+			return tank();
 		case CUSTOM:
 			return custom();
 		}
@@ -151,19 +168,58 @@ public class AnomalyDrive {
 		return this.dDrive;
 	}
 	
+	AccelerationCurve curveLeftDrive;
+	AccelerationCurve curveRightDrive;
+	
 	private boolean tank() {
 		
-		double vLeft = controllers.getDriveStickLeft().getY();
-		double vRight = controllers.getDriveStickRight().getY();
+		GenericHID leftStick = controllers.getDriveStickLeft();
+		GenericHID rightStick = controllers.getDriveStickRight();
+		
+		
+		double vLeft = leftStick.getY();
+		double vRight = rightStick.getY();
+		
+		if(leftStick.getRawButton(Config.DRIVING_PERCISION_MODE_BUTTON) || 
+			rightStick.getRawButton(Config.DRIVING_PERCISION_MODE_BUTTON)) {
+			
+			vLeft = leftStick.getY();
+			vRight = rightStick.getY();
+			
+			if(AnomalyMaths.withIn(vLeft, 0, Config.JOYSTICK_LEFT_DEADZONE)) {
+				vLeft = 0;
+			}
+			if(AnomalyMaths.withIn(vRight, 0, Config.JOYSTICK_RIGHT_DEADZONE)) {
+				vRight = 0;
+			}
+
+				
+			vLeft /= 2;
+			vRight /= 2;
+
+		}else {
+		
+		vLeft = leftStick.getY();
+		vRight = rightStick.getY();
+		
+		//vLeft = curveLeftDrive.convert(vLeft);
+		//vRight = curveRightDrive.convert(vRight);
+		
 		
 		if(AnomalyMaths.withIn(vLeft, 0, Config.JOYSTICK_LEFT_DEADZONE)) {
 			vLeft = 0;
 		}
+		
 		if(AnomalyMaths.withIn(vRight, 0, Config.JOYSTICK_RIGHT_DEADZONE)) {
 			vRight = 0;
 		}
+
 		
-		dDrive.tankDrive(vLeft, vRight);
+		System.out.println(vLeft + "" + vRight);
+		
+		}
+		
+		dDrive.tankDrive(-vLeft, -vRight);
 		
 		return true;
 	}

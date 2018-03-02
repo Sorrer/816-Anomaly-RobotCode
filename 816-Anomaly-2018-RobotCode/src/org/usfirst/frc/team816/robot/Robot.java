@@ -8,12 +8,18 @@
 package org.usfirst.frc.team816.robot;
 
 import org.usfirst.frc.team816.robot.auto.FieldState;
+import org.usfirst.frc.team816.robot.config.Config;
+import org.usfirst.frc.team816.robot.controlling.Controllers;
+import org.usfirst.frc.team816.robot.controlling.ControllingType;
+import org.usfirst.frc.team816.robot.drive.AnomalyDrive;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Spark;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -29,7 +35,7 @@ public class Robot extends IterativeRobot {
 	public NetworkTableEntry entry_vision_start;
 	
 	public FieldState field_state;
-	
+	AnomalyDrive aDrive;
 	
 	/**
 	 * Safety trigger for auto
@@ -40,13 +46,33 @@ public class Robot extends IterativeRobot {
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
+	
+	Spark lift;
+	
+	Spark intake1, intake2;
+	
+	Joystick controller;
+	
 	@Override
 	public void robotInit() {
 		nTableInstance = NetworkTableInstance.getDefault();
 		
 		field_state = new FieldState();
 		
+		Controllers controllers = new Controllers(ControllingType.DOUBLE_JOYSTICK_TANK);
+		aDrive = new AnomalyDrive(Config.MOTORS_CONFIG, controllers);
+		aDrive.initSpeedControllers();
+		aDrive.init();
 		
+		lift = new Spark(6);
+		
+//		lift.disable();
+		
+		intake1 = new Spark(3);
+		intake2 = new Spark(4);
+		
+		
+		controller = new Joystick(2);
 	}
 
 	@Override
@@ -59,7 +85,6 @@ public class Robot extends IterativeRobot {
 		
 		
 		
-		
 	}
 
 	/**
@@ -67,16 +92,36 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		
+	
 	}
 
 	@Override
 	public void teleopInit() {
-		
+		System.out.println("Teleop Init");
 	}
 	
 	@Override
 	public void teleopPeriodic() {
+		aDrive.run();
+		
+		double vLeft = controller.getRawAxis(1);
+		
+		if(AnomalyMaths.withIn(vLeft, 0, Config.JOYSTICK_LEFT_DEADZONE)) {
+			vLeft = 0;
+		}
+
+		double iLeft = controller.getRawAxis(2);
+		double iRight = controller.getRawAxis(3);
+		
+		iLeft = -((iLeft - 0.5) *2);
+		iRight = (iRight - 0.5) *2;
+		
+		intake1.set(iLeft + iRight);
+		intake2.set(-(iLeft + iRight));
+		
+		
+		
+		lift.set(vLeft/2);
 		
 	}
 	
