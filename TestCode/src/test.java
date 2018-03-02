@@ -147,8 +147,8 @@ public class test {
 		a.setRouteList();
 		c.initCurrent();
 
-		c.setFieldState("RNN");
-		c.setStartinPosition(PositionState.RIGHT);
+		c.setFieldState("NLN");
+		c.setStartinPosition(PositionState.LEFT);
 		c.setGoal(Goal.SWITCH);
 				
 		System.out.println(c.getConditionsList());
