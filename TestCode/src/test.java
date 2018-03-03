@@ -147,7 +147,7 @@ public class test {
 		a.setRouteList();
 		c.initCurrent();
 
-		c.setFieldState("RRR");
+		c.setFieldState("NNN");
 		c.setStartinPosition(PositionState.LEFT);
 		c.setGoal(Goal.SWITCH);
 				
@@ -157,7 +157,6 @@ public class test {
 		
 		
 		System.out.println(c.g);
-		System.out.println(a.pathfind(c));
 		System.out.println("///////////////////////");
 
 		RouteLeftSwitch rls = new RouteLeftSwitch();
@@ -178,5 +177,10 @@ public class test {
 		GoalCondition gc22 = new GoalCondition(Goal.NONE);
 		
 		System.out.println(gc11.compareCondition(gc22));
+		
+		System.out.println("///////////////////////");
+
+		System.out.println(a.pathfind(c));
+
 	}
 }
