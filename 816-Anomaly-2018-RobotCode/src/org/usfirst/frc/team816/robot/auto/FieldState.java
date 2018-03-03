@@ -1,7 +1,7 @@
 package org.usfirst.frc.team816.robot.auto;
 
-public class FieldState {
 
+public class FieldState { // mock fieldstate class
 	private PositionState AllySwitch = PositionState.NONE;
 	private PositionState EnemySwitch = PositionState.NONE;
 	private PositionState Scale = PositionState.NONE;
@@ -11,6 +11,10 @@ public class FieldState {
 	 * MAKE SURE setFieldState() is called before using this class.
 	 */
 	public FieldState() {}
+	
+	public FieldState(String positions) {
+		this.setFieldState(positions);
+	}
 	
 	/**
 	 *  Sets the field state (Left or Right) of the enemy switch, ally switch, and the scale
@@ -57,6 +61,8 @@ public class FieldState {
 			return PositionState.LEFT;
 		}else if(position == 'R') {
 			return PositionState.RIGHT;
+		}else if(position == 'N'){
+			return PositionState.NONE;
 		}else {
 			return PositionState.NONE;
 		}
@@ -71,6 +77,60 @@ public class FieldState {
 	
 	public PositionState getStartingPosition() {
 		return this.startPosition;
-	}
-}
+	}	
 	
+	/**
+	 * 
+	 * @param fs FieldState
+	 * @return If R = R L = L N = ANYTHING = true
+	 */
+	public boolean compare(FieldState fs) {
+		if(compareAllySwitch(fs)) {
+			if(compareScaleSwitch(fs)) {
+				if(compareEnemySwitch(fs)) {
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
+	
+	public boolean compareStartingPosition(FieldState fs) {
+		if(fs.getStartingPosition() == PositionState.NONE || this.getStartingPosition() == PositionState.NONE) {
+			return true;
+		}else if(fs.getStartingPosition() == this.getStartingPosition()) {
+			return true;
+		}
+		return false;
+	}
+
+	
+	private boolean compareAllySwitch(FieldState fs) {
+		if(fs.getAllySwitch() == PositionState.NONE || this.getAllySwitch() == PositionState.NONE) {
+			return true;
+		}else if(fs.getAllySwitch() == this.getAllySwitch()) {
+			return true;
+		}
+		return false;
+	}
+
+	private boolean compareScaleSwitch(FieldState fs) {
+		if(fs.getScale() == PositionState.NONE || this.getScale() == PositionState.NONE) {
+			return true;
+		}else if(fs.getScale() == this.getScale()) {
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean compareEnemySwitch(FieldState fs) {
+		if(fs.getEnemySwitch() == PositionState.NONE || this.getEnemySwitch() == PositionState.NONE) {
+			return true;
+		}else if(fs.getEnemySwitch() == this.getEnemySwitch()) {
+			return true;
+		}
+		return false;
+	}
+
+}
