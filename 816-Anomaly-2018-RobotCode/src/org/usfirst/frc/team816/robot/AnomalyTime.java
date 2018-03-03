@@ -2,62 +2,93 @@ package org.usfirst.frc.team816.robot;
 
 public class AnomalyTime {
 	
-	int target;
-	long current = 0;
-	long goal = 0;
-	
-	int goalspast = 0;
-	
+	private int countTo = 0;
+	private boolean done = true;
+	private long cur = 0;
+	private boolean paused = false;
+	public AnomalyTime(int milliseconds){
+		this.countTo = milliseconds;
+	}
 	boolean started = false;
-	
-	public AnomalyTime(int target) {
-		this.target = target;
-	}
-	
 	/**
-	 * Transfers the amount of times the goal was surpassed with the timeframe
+	 * Starts the timer
 	 */
-	public int transfer() {
-		int returnGoals = this.goalspast;
-		this.goalspast = 0;
-		return returnGoals;
-	}
-	
-	public void start() {
-		this.goalspast = 0;
-		this.current = System.currentTimeMillis();
-		this.goal = this.current + this.target;
+	public void start(){
 		this.started = true;
+		this.done = false;
+		this.cur = System.currentTimeMillis();
 	}
 	
-	public void setTiming(int timing) {
-		if(started) {
-			this.goal += (timing - this.target);
-			this.target = timing;
-		}else {
-			this.target = timing;
-		}
-	}
+	boolean wasPaused;
 	
-	public void update() {
-		if(!started) {
-			System.out.println("Automatically starting because update was called before start");
+	public void update(){
+		if(!this.started) {
 			this.start();
 		}
 		
-		int i = 0;
-		
-		long tempGoal = this.goal;
-		current = System.currentTimeMillis();
-		while(current > tempGoal) {
-			tempGoal += this.target;
-			i++;
+		if(this.paused){
+			wasPaused = true;
+			return;
+		}else if(this.wasPaused){
+			wasPaused = false;
+			this.cur = System.currentTimeMillis() - getProgressTime();
 		}
 		
-		if(i > 0) {
-			this.goalspast += i;
-			this.current = (tempGoal - current) + System.currentTimeMillis();
-			this.goal = this.current + this.target;
+		if(this.cur + this.countTo < System.currentTimeMillis()){
+			this.done = true;
+			return;
 		}
+	}
+	
+	/**
+	 * Is the timer done?
+	 * @return boolean
+	 */
+	public boolean isDone(){
+		return done;
+	}
+	
+	/**
+	 * How much elapsed time.
+	 * @return Milliseconds
+	 */
+	public int getProgressTime(){
+		if(this.isDone()){
+			return countTo;
+		}
+		return (int) (System.currentTimeMillis() - cur);
+	}
+	
+	/**
+	 * How far it elapsed. (0f - 1f)
+	 * @return percentage
+	 */
+	public float getProgress(){
+		if(this.isDone()){
+			return 1f;
+		}
+		return ((float) getProgressTime()) / ((float) countTo);
+	}
+	
+	/**
+	 * Sets the length of time the timer should count to
+	 */
+	public void setTimer(int milliseconds){
+		this.countTo = milliseconds;
+	}
+	
+	/**
+	 *Pauses the current timer
+	 *WARNING: Might prolong the timer
+	 */
+	public void pause(){
+		if(!this.isDone()) this.paused = true;
+	}
+	
+	/**
+	 * Resumes the current timer
+	 */
+	public void resume(){
+		this.paused = false;
 	}
 }

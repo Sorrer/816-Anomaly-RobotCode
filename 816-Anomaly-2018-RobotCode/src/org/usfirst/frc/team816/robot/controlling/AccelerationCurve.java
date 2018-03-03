@@ -6,7 +6,7 @@ import org.usfirst.frc.team816.robot.AnomalyTime;
 /**
  * Curves value to objective
  */
-
+@Deprecated
 public class AccelerationCurve {
 	
 	float curveAmount = 0f;
