@@ -84,7 +84,10 @@ public class AutoPath {
 				return route.getID();
 			}
 		}
-		
+			if (currentC.sp == PositionState.LEFT || currentC.sp == PositionState.RIGHT)
+			{
+				return RouteID.RouteAutoLine;
+			}
 		return RouteID.NONE;
 		
 	}

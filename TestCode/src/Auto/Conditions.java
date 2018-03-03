@@ -31,7 +31,6 @@ public class Conditions {
 	public void initCurrent() {
 		
 		g = Goal.NONE;
-		goal_condition = new GoalCondition(g);
 		
 		fp = "NNN";
 		fs = new FieldState(fp);
@@ -39,6 +38,7 @@ public class Conditions {
 		sp = PositionState.NONE;
 		fs.setStartinPosition(sp);
 		
+		goal_condition = new GoalCondition(g);
 		fieldstate_condition = new FieldStateCondition(fs);
 		starting_condition = new StartingPositionCondition(fs);
 		
@@ -48,18 +48,24 @@ public class Conditions {
 		conditions_list.add(starting_condition);
 		
 	}
+	
+	// init conditions after goal
+	// when setting set goal update condition
 
 	public void setGoal(Goal goal) {
 		g = goal;
+		goal_condition.setValue(g);
 	}
 	
 	
 	public void setFieldState(String positions) {
 		fp = positions;
+		fieldstate_condition.setValue(fs);
 	}
 	
 	public void setStartinPosition(PositionState state) {
 		sp = state;
+		starting_condition.setValue(fs);
 	}
 	
 	public ArrayList<Condition> getConditionsList() {
@@ -74,7 +80,7 @@ public class Conditions {
 			boolean correct = false;
 			
 			for(Condition con2 : conditions.getConditionsList()) {
-				if(con1.compareCondition(con2)) {  // always equaling true stops at first var?
+				if(con1.compareCondition(con2)) {
 					correct = true;
 					continue;
 				}

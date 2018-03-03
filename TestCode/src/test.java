@@ -149,7 +149,7 @@ public class test {
 
 		c.setFieldState("NLN");
 		c.setStartinPosition(PositionState.LEFT);
-		c.setGoal(Goal.SWITCH);
+		c.setGoal(Goal.NONE);
 				
 		System.out.println(c.getConditionsList());
 
