@@ -80,9 +80,14 @@ public class Conditions {
 			boolean correct = false;
 			
 			for(Condition con2 : conditions.getConditionsList()) {
+<<<<<<< HEAD
 				if(con1.compareCondition(con2)) {
+=======
+				System.out.println(con1.getValue() + " " + con2.getValue() + " " + con1.compareCondition(con2));
+				if(con1.compareCondition(con2)) {  // always equaling true stops at first var?
+>>>>>>> branch 'master' of https://github.com/Sorrer/816-Anomaly-RobotCode-2018
 					correct = true;
-					continue;
+					break;
 				}
 				
 			}

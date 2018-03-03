@@ -15,7 +15,7 @@ public class GoalCondition extends Condition {
 		if (this.condition == Goal.NONE || goal == Goal.NONE) {
 			return true;
 		}
-		else if (this.condition == goal) {
+		else if (this.condition.equals(goal)) {
 			return true;
 		}
 		return false;
@@ -28,7 +28,7 @@ public class GoalCondition extends Condition {
 
 	@Override
 	public void setValue(Object obj) {
-		if(obj.getClass() == Goal.class) { 
+		if(obj.getClass().equals(Goal.class)) { 
 			this.condition = (Goal) obj;
 		}
 		

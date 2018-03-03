@@ -147,7 +147,7 @@ public class test {
 		a.setRouteList();
 		c.initCurrent();
 
-		c.setFieldState("NLN");
+		c.setFieldState("LLL");
 		c.setStartinPosition(PositionState.LEFT);
 		c.setGoal(Goal.NONE);
 				
