@@ -13,6 +13,7 @@ public class DashboardData {
 	private SendableChooser<Goal> goal_chooser = new SendableChooser<>();
 	
 	
+	
 	boolean inited = false;
 	
 	public DashboardData() { init(); }
@@ -34,6 +35,18 @@ public class DashboardData {
 		goal_chooser.addObject(DashboardConfig.GOAL_SWITCH, Goal.SWITCH);
 		
 		SmartDashboard.putData(goal_chooser);
+
+		SmartDashboard.putNumber(DashboardConfig.AUTO_LINE_SPEED, 0.4);
+		SmartDashboard.putNumber(DashboardConfig.AUTO_LINE_TIME, 5);
+		
+		SmartDashboard.putNumber(DashboardConfig.AUTO_SWITCH_INTAKE_OUTPUT_SPEED, 0.3);
+		SmartDashboard.putNumber(DashboardConfig.AUTO_SWITCH_LIFT_HALT_SPEED, -0.2);
+		SmartDashboard.putNumber(DashboardConfig.AUTO_SWITCH_LIFT_MOVING_SPEED, -0.5);
+		SmartDashboard.putNumber(DashboardConfig.AUTO_SWITCH_LIFT_TIME, 3);
+		SmartDashboard.putNumber(DashboardConfig.AUTO_SWITCH_MOVING_SPEED, 0.4);
+		SmartDashboard.putNumber(DashboardConfig.AUTO_SWITCH_MOVING_TIME, 5);
+		
+		SmartDashboard.putBoolean(DashboardConfig.AUTO_ACTIVATED, true);
 	}
 	
 	
@@ -43,6 +56,47 @@ public class DashboardData {
 	
 	public Goal getGoal() {
 		return goal_chooser.getSelected();
+	}
+	
+	public boolean getAutoActivated() {
+		return SmartDashboard.getBoolean(DashboardConfig.AUTO_ACTIVATED, true);
+	}
+	
+	//AUTOLINE
+	
+	public double getAutoLineSpeed() {
+		return SmartDashboard.getNumber(DashboardConfig.AUTO_LINE_SPEED, 0.4);
+	}
+	
+	public double getAutoLineTime() {
+		return SmartDashboard.getNumber(DashboardConfig.AUTO_LINE_TIME, 5);
+	}
+	
+	//AUTO_SWITCH
+	
+	public double getAutoSwitchIntakeOutputSpeed() {
+		return SmartDashboard.getNumber(DashboardConfig.AUTO_SWITCH_INTAKE_OUTPUT_SPEED, 0);
+	}
+	public double getAutoSwitchLiftHaltSpeed() {
+		return SmartDashboard.getNumber(DashboardConfig.AUTO_SWITCH_LIFT_HALT_SPEED, 0);
+	}
+	public double getAutoSwitchLiftMovingSpeed() {
+		return SmartDashboard.getNumber(DashboardConfig.AUTO_SWITCH_LIFT_MOVING_SPEED, 0);
+	}
+	public double getAutoSwitchLiftTime() {
+		return SmartDashboard.getNumber(DashboardConfig.AUTO_SWITCH_LIFT_TIME, 0);
+	}
+	public double getAutoSwitchMovingSpeed() {
+		return SmartDashboard.getNumber(DashboardConfig.AUTO_SWITCH_MOVING_SPEED, 0);
+	}
+	public double getAutoSwitchMovingTime() {
+		return SmartDashboard.getNumber(DashboardConfig.AUTO_SWITCH_MOVING_TIME, 0);
+	}
+
+	//Gyro Heading
+	
+	public void setGyroHeading(double heading) {
+		SmartDashboard.putNumber(DashboardConfig.GYRO_HEADING, heading);
 	}
 	
 }

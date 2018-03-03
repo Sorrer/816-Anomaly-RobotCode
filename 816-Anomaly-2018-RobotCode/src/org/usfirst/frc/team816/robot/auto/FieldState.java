@@ -5,7 +5,7 @@ public class FieldState { // mock fieldstate class
 	private PositionState AllySwitch = PositionState.NONE;
 	private PositionState EnemySwitch = PositionState.NONE;
 	private PositionState Scale = PositionState.NONE;
-	
+	private String data;
 	/**
 	 * Positions of the switchs and scale.
 	 * MAKE SURE setFieldState() is called before using this class.
@@ -35,7 +35,13 @@ public class FieldState { // mock fieldstate class
 		if(Scale == PositionState.NONE) { return false; }
 		if(EnemySwitch == PositionState.NONE) { return false; }
 		
+		data = positions;
+		
 		return true;
+	}
+	
+	public String getData() {
+		return this.data;
 	}
 	
 	public PositionState getAllySwitch() {
@@ -64,7 +70,7 @@ public class FieldState { // mock fieldstate class
 		}else if(position == 'N'){
 			return PositionState.NONE;
 		}else {
-			return PositionState.NONE;
+			return PositionState.UNKNOWN;
 		}
 		
 	}

@@ -6,7 +6,7 @@ public class AutoLine extends Movement{
 	double moveTime, moveSpeed;
 	AnomalyTime timer_move;
 	
-	public AutoLine(double moveTime, double moveSpeed) {
+	public AutoLine(double moveSpeed, double moveTime) {
 		this.moveTime = moveTime;
 		this.moveSpeed = moveSpeed;
 	}

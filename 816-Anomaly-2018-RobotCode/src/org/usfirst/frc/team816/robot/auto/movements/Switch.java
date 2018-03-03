@@ -8,7 +8,7 @@ public class Switch extends Movement{
 	AnomalyTime timer_lift;
 	AnomalyTime timer_move;
 	
-	public Switch(double lift_time, double intake_output_speed, double move_time, double halt_lift_speed, double move_lift_up_speed, double move_speed) {
+	public Switch(double intake_output_speed,  double halt_lift_speed, double move_lift_up_speed, double lift_time, double move_speed, double move_time) {
 		this.lift_time = lift_time;
 		this.intake_output_speed = intake_output_speed;
 		this.move_time = move_time;
