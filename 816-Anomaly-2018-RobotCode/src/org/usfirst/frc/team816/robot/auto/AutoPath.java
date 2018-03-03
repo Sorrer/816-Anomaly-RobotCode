@@ -1,7 +1,5 @@
 package org.usfirst.frc.team816.robot.auto;
 
-import java.util.ArrayList;
-
 public class AutoPath {
 	FieldState fieldState;
 	PositionState allySwitch = fieldState.getAllySwitch();
