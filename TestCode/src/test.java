@@ -147,13 +147,14 @@ public class test {
 		a.setRouteList();
 		c.initCurrent();
 
-		c.setFieldState("LLL");
+		c.setFieldState("RRR");
 		c.setStartinPosition(PositionState.LEFT);
-		c.setGoal(Goal.NONE);
+		c.setGoal(Goal.SWITCH);
 				
 		System.out.println(c.getConditionsList());
 
  // should return RouteLeftSwitch
+		
 		
 		System.out.println(c.g);
 		System.out.println(a.pathfind(c));
@@ -163,6 +164,11 @@ public class test {
 		RouteLeftScale rlsc = new RouteLeftScale();
 		rls.init();
 		rlsc.init();
+		System.out.print("DDDDDDDDDDDDDDDDDDDDDDDDDdd");
+		System.out.println(c.compareConditionsList(c));
+		System.out.println(c.compareConditionsList(rls.getConditions()));
+		System.out.println(c.compareConditionsList(rlsc.getConditions()));
+		System.out.print("DDDDDDDDDDDDDDDDDDDDDDDDDdd");
 		
 		System.out.println("??????????????");
 		System.out.println(c.compareConditionsList(rlsc.getConditions()));

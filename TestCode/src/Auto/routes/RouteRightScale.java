@@ -17,8 +17,8 @@ public class RouteRightScale extends Route {
 
 	@Override
 	public void init() {
-		c.initCurrent();
 		c = new Conditions();
+		c.initCurrent();
 		c.setFieldState("NRN");
 		c.setStartinPosition(PositionState.RIGHT);
 		c.setGoal(Goal.SCALE);

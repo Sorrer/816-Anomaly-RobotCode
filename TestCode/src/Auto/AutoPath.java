@@ -59,18 +59,18 @@ public class AutoPath {
 	
 	public void setRouteList() {
 		
-		routes.add(route_left_scale);
 		routes.add(route_left_switch);
-		routes.add(route_line_left);
-		routes.add(route_line_mid_left);
-		routes.add(route_line_mid_right);
-		routes.add(route_line_right);
-		routes.add(route_right_scale);
 		routes.add(route_right_switch);
-		routes.add(route_scale_mid_left);
-		routes.add(route_scale_mid_right);
-		routes.add(route_switch_mid_left);
-		routes.add(route_switch_mid_right);
+		routes.add(route_line_left);
+		routes.add(route_line_right);
+//		routes.add(route_left_scale);
+//		routes.add(route_line_mid_left);
+//		routes.add(route_line_mid_right);
+//		routes.add(route_scale_mid_left);
+//		routes.add(route_scale_mid_right);
+//		routes.add(route_switch_mid_left);
+//		routes.add(route_switch_mid_right);
+//		routes.add(route_right_scale);
 	}
 	
 	
@@ -84,7 +84,7 @@ public class AutoPath {
 				return route.getID();
 			}
 		}
-			if (currentC.sp == PositionState.LEFT || currentC.sp == PositionState.RIGHT)
+			if ((currentC.sp == PositionState.LEFT || currentC.sp == PositionState.RIGHT) && currentC.g != Goal.NONE)
 			{
 				return RouteID.RouteAutoLine;
 			}
