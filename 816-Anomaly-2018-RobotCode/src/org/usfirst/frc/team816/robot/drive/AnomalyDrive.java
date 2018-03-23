@@ -193,10 +193,6 @@ public class AnomalyDrive {
 				vRight = 0;
 			}
 
-				
-			vLeft *= 2;
-			vRight *= 2;
-
 		}else {
 		
 		vLeft = leftStick.getY();
@@ -229,7 +225,7 @@ public class AnomalyDrive {
 			System.err.println("Can't manual drive, TANK DRIVE is not inited OR AnomalyDrive is in use!");
 			return;
 		}else {
-			dDrive.tankDrive(left, right);
+			dDrive.tankDrive(-left, -right);
 		}
 	}
 	

@@ -19,7 +19,6 @@ public class DashboardConfig {
 
 	public static final String AUTO_SWITCH_LIFT_TIME = "AutoSwitch lift moving time ";
 	public static final String AUTO_SWITCH_LIFT_MOVING_SPEED = "AutoSwitch lift moving speed ";
-	public static final String AUTO_SWITCH_LIFT_HALT_SPEED = "AutoSwitch lift halt speed ";
 	public static final String AUTO_SWITCH_MOVING_TIME = "AutoSwitch move time ";
 	public static final String AUTO_SWITCH_MOVING_SPEED = "AutoSwitch move speed ";
 	public static final String AUTO_SWITCH_INTAKE_OUTPUT_SPEED = "AutoSwitch intake output speed ";

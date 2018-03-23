@@ -4,16 +4,15 @@ import org.usfirst.frc.team816.robot.AnomalyTime;
 
 public class Switch extends Movement{
 	
-	double lift_time, intake_output_speed, move_time, halt_lift_speed, move_lift_speed, move_speed;
+	double lift_time, intake_output_speed, move_time, move_lift_speed, move_speed;
 	AnomalyTime timer_lift;
 	AnomalyTime timer_move;
 	
-	public Switch(double intake_output_speed,  double halt_lift_speed, double move_lift_up_speed, double lift_time, double move_speed, double move_time) {
+	public Switch(double intake_output_speed, double move_lift_up_speed, double lift_time, double move_speed, double move_time) {
 		this.lift_time = lift_time;
 		this.intake_output_speed = intake_output_speed;
 		this.move_time = move_time;
 		
-		this.halt_lift_speed = halt_lift_speed;
 		this.move_lift_speed = move_lift_up_speed;
 		this.move_speed = move_speed;
 	}
@@ -31,12 +30,12 @@ public class Switch extends Movement{
 			timer_lift.update();
 			this.getLift().move(this.move_lift_speed);
 		}else {
-			this.getLift().move(this.halt_lift_speed);
+			this.getLift().move(0);
 		}
 		
 		if(!timer_move.isDone()) {
 			timer_move.update();
-			this.getDrive().getDrive().arcadeDrive(this.move_speed, this.gyro.getAngle()/360.0);
+			this.getDrive().getDrive().arcadeDrive(-this.move_speed, this.gyro.getAngle()/360.0);
 		}else {
 			this.getIntake().move(this.intake_output_speed);
 		}

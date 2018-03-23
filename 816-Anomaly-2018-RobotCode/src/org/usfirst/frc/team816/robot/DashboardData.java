@@ -40,7 +40,6 @@ public class DashboardData {
 		SmartDashboard.putNumber(DashboardConfig.AUTO_LINE_TIME, 5);
 		
 		SmartDashboard.putNumber(DashboardConfig.AUTO_SWITCH_INTAKE_OUTPUT_SPEED, 0.3);
-		SmartDashboard.putNumber(DashboardConfig.AUTO_SWITCH_LIFT_HALT_SPEED, -0.2);
 		SmartDashboard.putNumber(DashboardConfig.AUTO_SWITCH_LIFT_MOVING_SPEED, -0.5);
 		SmartDashboard.putNumber(DashboardConfig.AUTO_SWITCH_LIFT_TIME, 3);
 		SmartDashboard.putNumber(DashboardConfig.AUTO_SWITCH_MOVING_SPEED, 0.4);
@@ -76,9 +75,6 @@ public class DashboardData {
 	
 	public double getAutoSwitchIntakeOutputSpeed() {
 		return SmartDashboard.getNumber(DashboardConfig.AUTO_SWITCH_INTAKE_OUTPUT_SPEED, 0);
-	}
-	public double getAutoSwitchLiftHaltSpeed() {
-		return SmartDashboard.getNumber(DashboardConfig.AUTO_SWITCH_LIFT_HALT_SPEED, 0);
 	}
 	public double getAutoSwitchLiftMovingSpeed() {
 		return SmartDashboard.getNumber(DashboardConfig.AUTO_SWITCH_LIFT_MOVING_SPEED, 0);

@@ -26,7 +26,11 @@ public class Config {
 	public static InvertState DT_STATE_RIGHT_2 	= InvertState.INVERTED; 
 	
 		
+	//Lift
 	
+	public static double LIFT_BREAK_DEADZONE = 0.2;
+	
+	public static double LIFT_BREAK_DELAY = 0.1;
 	
 	//CONTROLLERS
 

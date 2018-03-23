@@ -20,7 +20,7 @@ public class AutoLine extends Movement{
 	public void update() {
 		if(!timer_move.isDone()) {
 			timer_move.update();
-			this.getDrive().getDrive().arcadeDrive(this.moveSpeed, gyro.getAngle()/360.0);
+			this.getDrive().getDrive().arcadeDrive(-this.moveSpeed, gyro.getAngle()/360.0);
 		}
 	}
 	

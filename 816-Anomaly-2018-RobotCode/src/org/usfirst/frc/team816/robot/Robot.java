@@ -18,6 +18,7 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -37,6 +38,8 @@ public class Robot extends IterativeRobot {
 	
 	public FieldState field_state;
 	AnomalyDrive aDrive;
+	
+	Compressor compressor;
 	
 	/**
 	 * Safety trigger for auto
@@ -63,6 +66,8 @@ public class Robot extends IterativeRobot {
 	
 	@Override
 	public void robotInit() {
+		compressor = new Compressor(0);
+		compressor.setClosedLoopControl(true);
 		nTableInstance = NetworkTableInstance.getDefault();
 		
 		field_state = new FieldState();
@@ -124,7 +129,7 @@ public class Robot extends IterativeRobot {
 		
 		if(path.equals(RouteID.RouteLeftSwitch) || path.equals(RouteID.RouteRightSwitch)) {
 			SmartDashboard.putString("Auto mode: ", "Switch");
-			this.autoMove = new Switch(ds.getAutoSwitchIntakeOutputSpeed(), ds.getAutoSwitchLiftHaltSpeed(), ds.getAutoSwitchLiftMovingSpeed(), ds.getAutoSwitchLiftTime(), ds.getAutoSwitchMovingTime(), ds.getAutoSwitchMovingSpeed());
+			this.autoMove = new Switch(ds.getAutoSwitchIntakeOutputSpeed(), ds.getAutoSwitchLiftMovingSpeed(), ds.getAutoSwitchLiftTime(), ds.getAutoSwitchMovingTime(), ds.getAutoSwitchMovingSpeed());
 		}else if(path.equals(RouteID.RouteLineLeft) || path.equals(RouteID.RouteLineRight) || path.equals(RouteID.RouteAutoLine)) {
 			SmartDashboard.putString("Auto mode: ", "AutoLine")	;
 			this.autoMove = new AutoLine(ds.getAutoLineSpeed() , ds.getAutoLineTime());
