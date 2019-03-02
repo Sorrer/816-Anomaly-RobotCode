@@ -2,7 +2,6 @@ package org.usfirst.frc.team816.robot.drive;
 
 import org.usfirst.frc.team816.robot.AnomalyMaths;
 import org.usfirst.frc.team816.robot.config.Config;
-import org.usfirst.frc.team816.robot.controlling.AccelerationCurve;
 import org.usfirst.frc.team816.robot.controlling.Controllers;
 
 import edu.wpi.first.wpilibj.GenericHID;
@@ -10,6 +9,10 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 
 public class AnomalyDrive {
 	private DriveType type = Config.MOTORS_CONFIG;
@@ -22,6 +25,9 @@ public class AnomalyDrive {
 	SpeedControllerGroup sparks_left;
 	SpeedControllerGroup sparks_right;
 	
+	SpeedControllerGroup maxs_left;
+	SpeedControllerGroup maxs_right;
+
 	Talon T_LEFT;
 	Talon T_RIGHT;
 	Talon T_LEFT_2;
@@ -31,6 +37,11 @@ public class AnomalyDrive {
 	Spark S_RIGHT;
 	Spark S_LEFT_2;
 	Spark S_RIGHT_2;
+
+	CANSparkMax SM_LEFT;
+	CANSparkMax SM_RIGHT;
+	CANSparkMax SM_LEFT_2;
+	CANSparkMax SM_RIGHT_2;
 	
 	boolean inited = false;
 	
@@ -46,8 +57,6 @@ public class AnomalyDrive {
 	}
 	
 	public boolean init() {
-		curveLeftDrive = new AccelerationCurve(Config.CURVE_AMOUNT, Config.CURVE_INCREMENTS_AMOUNT, Config.CURVE_INCREMENTS_TIMING);
-		 curveRightDrive = new AccelerationCurve(Config.CURVE_AMOUNT, Config.CURVE_INCREMENTS_AMOUNT, Config.CURVE_INCREMENTS_TIMING);
 		
 		if(!inited) { inited = true; } else { System.err.println("Init already executed, shouldn't call twice;");return false;}
 		
@@ -56,10 +65,16 @@ public class AnomalyDrive {
 			switch(Config.DRIVE_CONTROLLERS) {
 			case TALON:
 				dDrive = new DifferentialDrive(talons_left, talons_right);
+				dDrive.setSafetyEnabled(false);
 				break;
 			
 			case SPARK:
 				dDrive = new DifferentialDrive(sparks_left, sparks_right);
+				dDrive.setSafetyEnabled(false);
+				break;
+			case SPARKMAX:
+				dDrive = new DifferentialDrive(maxs_left, maxs_right);
+				dDrive.setSafetyEnabled(false);
 				break;
 			}
 			return true;
@@ -67,10 +82,15 @@ public class AnomalyDrive {
 			switch(Config.DRIVE_CONTROLLERS) {
 			case TALON:
 				dDrive = new DifferentialDrive(talons_left, talons_right);
+				dDrive.setSafetyEnabled(false);
 				break;
-			
 			case SPARK:
 				dDrive = new DifferentialDrive(sparks_left, sparks_right);
+				dDrive.setSafetyEnabled(false);
+				break;
+			case SPARKMAX:
+				dDrive = new DifferentialDrive(maxs_left, maxs_right);
+				dDrive.setSafetyEnabled(false);
 				break;
 			}
 			return true;
@@ -104,7 +124,11 @@ public class AnomalyDrive {
 					sparks_left = new SpeedControllerGroup(S_LEFT);
 					sparks_right = new SpeedControllerGroup(S_RIGHT);					
 					break;
-					
+
+				case SPARKMAX:
+					maxs_left  = new SpeedControllerGroup(SM_LEFT, SM_LEFT_2);
+					maxs_right  = new SpeedControllerGroup(SM_RIGHT, SM_RIGHT_2);
+					break;
 				}
 				
 				return;
@@ -136,7 +160,18 @@ public class AnomalyDrive {
 					sparks_right = new SpeedControllerGroup(S_RIGHT, S_RIGHT_2);					
 					break;
 					
+				case SPARKMAX:
+					SM_LEFT = MotorUtils.createMax(1, MotorType.kBrushless, Config.DT_STATE_LEFT_1);
+					SM_LEFT_2 = MotorUtils.createMax(2, MotorType.kBrushless, Config.DT_STATE_LEFT_2);
+					
+					SM_RIGHT = MotorUtils.createMax(3, MotorType.kBrushless, Config.DT_STATE_RIGHT_1);
+					SM_RIGHT_2 = MotorUtils.createMax(4, MotorType.kBrushless, Config.DT_STATE_RIGHT_2);
+
+					maxs_left  = new SpeedControllerGroup(SM_LEFT, SM_LEFT_2);
+					maxs_right  = new SpeedControllerGroup(SM_RIGHT, SM_RIGHT_2);
 				}
+
+				
 				return;
 			}
 			
@@ -168,8 +203,6 @@ public class AnomalyDrive {
 		return this.dDrive;
 	}
 	
-	AccelerationCurve curveLeftDrive;
-	AccelerationCurve curveRightDrive;
 	
 	private boolean tank() {
 		
@@ -192,7 +225,11 @@ public class AnomalyDrive {
 			if(AnomalyMaths.withIn(vRight, 0, Config.JOYSTICK_RIGHT_DEADZONE)) {
 				vRight = 0;
 			}
+			
 
+			vLeft *= 0.75;
+			vRight *= 0.75;
+			
 		}else {
 		
 		vLeft = leftStick.getY();
@@ -210,8 +247,8 @@ public class AnomalyDrive {
 			vRight = 0;
 		}
 		
-		vLeft /= 2;
-		vRight /= 2;
+//		vLeft *= 0.75;
+//		vRight *= 0.75;
 		
 		}
 		
