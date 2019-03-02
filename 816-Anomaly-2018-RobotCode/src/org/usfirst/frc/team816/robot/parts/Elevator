@@ -1,0 +1,25 @@
+package org.usfirst.frc.team816.robot.parts;
+
+import org.usfirst.frc.team816.robot.controlling.Controllers;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+
+public class Elevator extends Part {
+
+    Controllers c;
+    DoubleSolenoid piston;
+
+    @Override
+    public void initMech(Controllers c) {
+        this.c = c;
+        piston = new DoubleSolenoid(0,1);
+        piston.set(Value.kReverse);
+    }
+
+    @Override
+    public void teleop() {
+        if (c.getOperatorController().getRawButton(10)) {
+            piston.set(Value.kForward);
+        }
+
+    }
