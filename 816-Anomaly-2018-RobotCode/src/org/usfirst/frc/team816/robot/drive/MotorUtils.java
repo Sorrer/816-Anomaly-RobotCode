@@ -1,5 +1,7 @@
 package org.usfirst.frc.team816.robot.drive;
 
+import com.revrobotics.CANSparkMax;
+
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Talon;
 
@@ -43,4 +45,22 @@ public class MotorUtils {
 		
 		return temp_spark;
 	}
+
+	public static CANSparkMax createMax(int deviceID,CANSparkMax.MotorType type, InvertState state) {
+		CANSparkMax temp_max = new CANSparkMax(deviceID, type);
+		switch(state) {
+		case INVERTED:
+			temp_max.setInverted(true);
+			break;
+
+		case NORMAL:
+			temp_max.setInverted(false);
+		
+		case DISABLED:
+			return null;
+		}
+		return temp_max;
+	}
+
+
 }
