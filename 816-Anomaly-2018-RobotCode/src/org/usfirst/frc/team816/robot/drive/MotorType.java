@@ -1,5 +1,5 @@
 package org.usfirst.frc.team816.robot.drive;
 
 public enum MotorType {
-	SPARK, TALON
+	SPARK, TALON, SPARKMAX
 }
